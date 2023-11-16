@@ -18,29 +18,25 @@ const App = () => {
 
   const submitHandler =  e => {
     e.preventDefault();
-    axios.post('https://signup-form-d89d0-default-rtdb.firebaseio.com/register.json', data).then(() => alert("submitted successfully"));
     if(userName.length < 5) {
       alert('username atleaset must be 5 characters');
     } else if(password !== confirmPassword) {
       alert('password are not matched');
     } else {
       console.log(data);
+      axios.post('https://signup-form-d89d0-default-rtdb.firebaseio.com/register.json', data).then(() => alert("submitted successfully"));
     }
-  
-    this.getData = () => {
-      axios.get('https://signup-form-d89d0-default-rtdb.firebaseio.com/register.json').then((response => console.log(response.json)))
-    }
-    
+
   }
 
   return (
     <div className="App">
       <center>
         <form autoComplete='off' onSubmit={submitHandler}>
-         <input type="text" name="userName" value={userName} onChange={changeHandler}/><br/>
-         <input type="email" name="email" value={email} onChange={changeHandler}/><br/>
-         <input type="password" name="password" value={password} onChange={changeHandler}/><br/>
-         <input type="password" name="confirmPassword" value={confirmPassword} onChange={changeHandler}/><br/>
+         <input placeholder='username' type="text" name="userName" value={userName} onChange={changeHandler}/><br/>
+         <input placeholder='email' type="email" name="email" value={email} onChange={changeHandler}/><br/>
+         <input placeholder='password' type="password" name="password" value={password} onChange={changeHandler}/><br/>
+         <input placeholder='confirm password' type="password" name="confirmPassword" value={confirmPassword} onChange={changeHandler}/><br/>
          {password !== confirmPassword ? <p style={{color: "red"}}>passwords are not matching</p>: null}
          <input type="submit" />
         </form>
